@@ -11,3 +11,5 @@ Based on DarrenN's [Stretchy Pants](https://github.com/DarrenN/stretchy_pants)
 * Slim
 * 960.gs
 * Formalize
+* MiniTest
+* Guard
