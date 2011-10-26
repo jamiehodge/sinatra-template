@@ -2,23 +2,20 @@ class MyApp < Sinatra::Base
   
   configure do
     set :app_file, __FILE__
-  end
-  
-  configure :development do
-    Compass.add_project_configuration('config/compass.rb')
     
-    get '/stylesheets/:name.css' do
-      content_type 'text/css', charset: 'utf-8'
-      sass(:"stylesheets/#{params[:name]}", Compass.sass_engine_options)
+    Compass.configuration do |c|
+      c.environment = environment
+      c.project_path = root
+      c.sass_dir = File.join('views','stylesheets')
+      c.output_style = development? ? :expanded : :compressed
+      c.relative_assets = development?
     end
-  end
-  
-  configure :production do
-    
+    set :sass, Compass.sass_engine_options
   end
   
   helpers do
     include Sinatra::WardenHelpers
+    
     include Rack::Utils
     alias_method :h, :escape_html
   end
@@ -26,5 +23,9 @@ class MyApp < Sinatra::Base
   before do
     @app_title = 'Sinatra Template'
     @page_title = request.path_info.gsub(/\//,' ').strip.capitalize
+  end
+  
+  get '/stylesheets/:name.css' do
+    sass :"stylesheets/#{params[:name]}"
   end
 end
