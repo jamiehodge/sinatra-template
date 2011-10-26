@@ -17,7 +17,7 @@ class MyApp < Sinatra::Base
   end
   
   post '/unauthenticated' do
-    flash.error = 'Unauthorized'
+    flash.error = warden.message
     redirect to '/login'
   end
 end
