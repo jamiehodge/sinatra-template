@@ -1,0 +1,69 @@
+doctype html
+/[ if IE 7 ]
+    html.no-js.ie7 lang='en'
+/[ if IE 8 ]
+    html.no-js.ie8 lang='en'
+| <!--[if (gte IE 9)|!(IE)]<!--> <html class="no-js" lang="en"> <!--<![endif]-->
+head
+  meta charset='utf-8'
+  
+  meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'
+  
+  title = "#{@page_title} | #{@app_title}"
+  meta name='description' content='' 
+  meta name='author' content='' 
+  meta name='keywords' content=''
+  
+  meta name='viewport' content='width=device-width; initial-scale=1.0'
+  
+  link href=url('/favicon.ico') rel='shortcut icon'
+  link href=url('/apple-touch-icon.png') rel='apple-touch-icon'
+  
+  link href=url('/stylesheets/style.css?v=1') rel='stylesheet'
+  link href=url('/stylesheets/handheld.css?v=1') media='handheld' rel='stylesheet'
+  
+  script src=url('/js/modernizr-2.0.min.js')
+body
+  #container
+    header
+      h1 
+        a href=url('/') = @app_title
+    aside
+      nav
+        ul
+          - if warden.authenticated?
+            li Welcome back #{warden.user.name}
+            li
+              a href=url('/logout') logout
+          - else
+            li
+              a href='/login' login to your account
+              
+    #main roles='main'
+      #flash
+        - [:notice, :error, :success].each do |name|
+          - if flash.has?(name)
+            .message class=name
+              p = flash[name]
+      == yield
+      
+    footer
+      small &copy;#{Date.today.year}
+      
+  script src='//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'
+  javascript:
+    window.jQuery || document.write("<script src=\"#{url('/js/jquery-1.6.4.min.js')}\"><\/script>")
+  
+  script src=url('/js/jquery.formalize.min.js')
+  script src=url('/js/plugin.js?v=1') // concatenated and minified scripts
+  script src=url('/js/script.js?v=1') // application code
+  
+  javascript:
+    var _gaq = [['_setAccount', 'UA-XXXXX-X'], ['_trackPageview'], ['_trackPageLoadTime']];
+    (function(d, t) {
+      var g = d.createElement(t),
+          s = d.getElementByTagName(t)[0];
+      g.async = 1;
+      g.src = ('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+      s.parentNode.insertBefore(g, s);
+    })(document, 'script');

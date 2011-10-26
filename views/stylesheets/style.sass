@@ -1,0 +1,29 @@
+@import "compass/reset"
+@import "compass"
+@import "960/grid"
+@import "formalize"
+@import "flash"
+
++establish-baseline
++flash-message-classes
+
+body
+  background-color: #eee
+  
+$ninesixty-columns: 24
+
+#container
+  +grid-container
+  background-color: white
+  overflow: auto
+  header, footer
+    +grid(24)
+    h1
+      +adjust-font-size-to(24px)
+  aside
+    +grid(8)
+  #main
+    +grid(16)
+    h1
+      +adjust-font-size-to(24px)
+    background-color: #eee
