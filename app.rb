@@ -11,6 +11,9 @@ class MyApp < Sinatra::Base
       c.relative_assets = development?
     end
     set :sass, Compass.sass_engine_options
+    
+    enable :sessions, :logging, :method_override
+    use Rack::Flash, accessorize: [:notice, :error, :success]
   end
   
   helpers do
