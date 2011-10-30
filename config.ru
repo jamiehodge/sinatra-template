@@ -1,6 +1,6 @@
 require './init'
 
-use Rack::Cache
+use Rack::Cache if ENV['RACK_ENV'] == 'production'
 
 use Warden::Manager do |manager|
   manager.default_strategies :password
