@@ -1,7 +1,7 @@
 class MyApp < Sinatra::Base
 
   get '/login' do
-    slim :'users/login'
+    slim :'warden/login'
   end
   
   post '/login' do

@@ -8,7 +8,7 @@ class MyApp < Sinatra::Base
     slim :'users/new'
   end
   
-  post '/users/new' do
+  post '/users' do
     user = User.new(params[:user])
     if user.valid?
       user.save
@@ -18,19 +18,25 @@ class MyApp < Sinatra::Base
     end
   end
   
+  before %r{/users/([\d]+)} do |id|
+    not_found unless @user = User[id]
+  end
+  
   get '/users/:id' do
-    not_found unless user = User[params[:id]]
-    slim :'users/show', locals: { user: user }
+    slim :'users/show', locals: { user: @user }
   end
   
   get '/users/:id/edit' do
-    not_found unless user = User[params[:id]]
-    slim :'users/edit', locals: { user: user }
+    slim :'users/edit', locals: { user: @user }
   end
   
   put '/users/:id' do
-    not_found unless user = User[params[:id]]
-    user.update(params[:user])
-    redirect to "/users/#{user.id}"
+    @user.update(params[:user])
+    redirect to "/users/#{@user.id}"
+  end
+  
+  delete '/users/:id' do
+    @user.destroy
+    redirect to '/users'
   end
 end
