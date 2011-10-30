@@ -6,6 +6,8 @@ gem 'slim'
 
 gem 'sinatra', require: 'sinatra/base'
 gem 'rack-flash', require: 'rack/flash'
+gem 'rack-cache', require: 'rack/cache'
+
 gem 'warden'
 gem 'bcrypt-ruby', require: 'bcrypt'
 

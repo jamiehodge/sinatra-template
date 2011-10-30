@@ -26,6 +26,7 @@ class MyApp < Sinatra::Base
   before do
     @app_title = 'Sinatra Template'
     @page_title = request.path_info.gsub(/\//,' ').strip.capitalize
+    cache_control :public, :must_revalidate, max_age: 60
   end
   
   get '/stylesheets/:name.css' do
