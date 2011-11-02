@@ -54,6 +54,11 @@ body
       
     footer
       small &copy;#{Date.today.year}
+      nav
+        ul
+          - for locale in r18n.available_locales do
+            li
+              a href="?locale=#{locale.code}" = locale.title.downcase
       
   script src='//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'
   javascript:
