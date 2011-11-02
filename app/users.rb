@@ -1,14 +1,5 @@
 module App
-  class Users < Sinatra::Base
-    
-    configure do
-      set :app_file, '.'
-      register Sinatra::R18n
-    end
-    
-    configure :development do
-      register Sinatra::Reloader
-    end
+  class Users < App::Base
     
     helpers do
       def cycle
@@ -17,7 +8,6 @@ module App
     end
     
     before do
-      session[:locale] = params[:locale] if params[:locale]
       env['warden'].authenticate!
     end
     

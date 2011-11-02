@@ -1,8 +1,7 @@
 module App
-  class Public < Sinatra::Base
+  class Public < App::Base
     
     configure do
-      set :app_file, '.'
       Compass.configuration do |c|
         c.environment = environment
         c.project_path = root
@@ -11,16 +10,6 @@ module App
         c.relative_assets = development?
       end
       set :sass, Compass.sass_engine_options
-      
-      register Sinatra::R18n
-    end
-    
-    configure :development do
-      register Sinatra::Reloader
-    end
-    
-    before do
-      session[:locale] = params[:locale] if params[:locale]
     end
     
     get '/stylesheets/:name.css' do

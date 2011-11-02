@@ -1,18 +1,5 @@
 module App
-  class Session < Sinatra::Base
-    
-    configure do
-      set :app_file, '.'
-      register Sinatra::R18n
-    end
-    
-    configure :development do
-      register Sinatra::Reloader
-    end
-    
-    before do
-      session[:locale] = params[:locale] if params[:locale]
-    end
+  class Session < App::Base
     
     get '/new' do
       slim :'/session/new'
