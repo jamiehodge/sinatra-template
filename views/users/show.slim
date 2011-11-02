@@ -5,11 +5,11 @@ article.user
     
   form action=url("#{user.id}") method='post'
     input type='hidden' name='_method' value='delete'
-    input type='submit' value='delete'
+    input type='submit' value=t.actions.delete
 nav
   ul
     li
-      a href=url("#{user.id}/edit") edit
+      a href=url("#{user.id}/edit") = t.actions.edit
     li
-      a href=url('/') index
+      a href=url('/') = t.nav.users
     

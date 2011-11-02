@@ -1,7 +1,7 @@
 table.users
   tr class=cycle.next
-    th Name
-    th Password
+    th = t.user.name
+    th = t.user.password
   - for user in users do
     tr class=cycle.next
       td 
@@ -11,4 +11,4 @@ table.users
 nav
   ul
     li 
-      a href=url('/new') new
+      a href=url('/new') = t.actions.create

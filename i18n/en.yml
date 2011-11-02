@@ -1,0 +1,17 @@
+app:
+  title: Sinatra Template
+nav:
+  root: home
+  admin: admin
+  users: users
+  login: login
+  logout: logout
+actions:
+  create: create
+  edit: edit
+  update: update
+  delete: delete
+  cancel: cancel
+user:
+  name: name
+  password: password

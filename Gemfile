@@ -8,6 +8,7 @@ gem 'coffee-script'
 gem 'sinatra', require: 'sinatra/base'
 gem 'rack-flash', require: 'rack/flash'
 gem 'rack-cache', require: 'rack/cache'
+gem 'sinatra-r18n', require: 'sinatra/r18n'
 
 gem 'warden'
 gem 'bcrypt-ruby', require: 'bcrypt'

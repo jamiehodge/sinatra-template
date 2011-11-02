@@ -1,0 +1,17 @@
+app:
+  title: Sinatra skabelon
+nav:
+  root: hjemme
+  admin: admin
+  users: bruger
+  login: log på
+  logout: log ud
+actions:
+  create: oprette
+  edit: rediger
+  update: opdater
+  delete: slet
+  cancel: annullere
+user:
+  name: navn
+  password: adgangskode

@@ -27,22 +27,22 @@ body
   #container
     header
       h1 
-        a href='/' Sinatra Template
+        a href='/' = t.app.title
     aside
       nav
         ul
           li
-            a href='/' index
+            a href='/' = t.nav.root
           - if env['warden'].authenticated?
             li
-              a href='/admin/users' users
+              a href='/admin/users' = t.nav.users
             li
               form action='/session' method='post'
                 input type='hidden' name='_method' value='delete'
-                input type='submit' value='logout'
+                input type='submit' value=t.nav.logout
           - else
             li
-              a href='/session/new' login to your account
+              a href='/session/new' = t.nav.login
               
     #main roles='main'
       #flash

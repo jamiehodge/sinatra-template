@@ -22,6 +22,7 @@ GEM
       guard (~> 0.4)
     minitest (2.6.1)
     multi_json (1.0.3)
+    r18n-core (0.4.11)
     rack (1.3.5)
     rack-cache (1.1)
       rack (>= 0.4)
@@ -39,6 +40,9 @@ GEM
       rack (~> 1.3, >= 1.3.4)
       rack-protection (~> 1.1, >= 1.1.2)
       tilt (~> 1.3, >= 1.3.3)
+    sinatra-r18n (0.4.11)
+      r18n-core (= 0.4.11)
+      sinatra (>= 1.3)
     slim (1.0.3)
       temple (~> 0.3.4)
       tilt (~> 1.3.2)
@@ -67,6 +71,7 @@ DEPENDENCIES
   sass
   sequel
   sinatra
+  sinatra-r18n
   slim
   sqlite3
   warden

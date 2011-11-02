@@ -11,6 +11,12 @@ module App
         c.relative_assets = development?
       end
       set :sass, Compass.sass_engine_options
+      
+      register Sinatra::R18n
+    end
+    
+    before do
+      session[:locale] = params[:locale] if params[:locale]
     end
     
     get '/stylesheets/:name.css' do

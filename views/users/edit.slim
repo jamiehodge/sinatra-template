@@ -2,6 +2,6 @@ form action=url("/#{user.id}") method='post'
   input type='hidden' name='_method' value='put'
   input type='text' name='user[name]' value=user.name
   input type='password' name='user[password]' value=user.password
-  input type='submit' value='update'
+  input type='submit' value=t.actions.update
   p
-    a href=url("/#{user.id}") cancel
+    a href=url("/#{user.id}") = t.actions.cancel

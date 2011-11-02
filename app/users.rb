@@ -3,6 +3,7 @@ module App
     
     configure do
       set :app_file, '.'
+      register Sinatra::R18n
     end
     
     helpers do
@@ -12,6 +13,7 @@ module App
     end
     
     before do
+      session[:locale] = params[:locale] if params[:locale]
       env['warden'].authenticate!
     end
     
