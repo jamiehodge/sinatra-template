@@ -1,5 +1,17 @@
 class User < Sequel::Model
   
+  plugin :schema
+  
+  unless table_exists?
+    set_schema do
+      primary_key :id
+      String :name, null: false
+      String :password, null: false
+    end
+    
+    create_table
+  end
+  
   plugin :validation_helpers
   
   def validate
