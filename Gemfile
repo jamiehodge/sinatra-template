@@ -7,7 +7,6 @@ gem 'coffee-script'
 
 gem 'sinatra', require: 'sinatra/base'
 gem 'rack-flash', require: 'rack/flash'
-gem 'rack-cache', require: 'rack/cache'
 gem 'sinatra-r18n', require: 'sinatra/r18n'
 
 gem 'warden'
@@ -27,5 +26,9 @@ group :test do
   gem 'guard-minitest'
   gem 'rb-fsevent'
   gem 'growl_notify'
+end
+
+group :production do
+  gem 'rack-cache', require: 'rack/cache'
 end
 

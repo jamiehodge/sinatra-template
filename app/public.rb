@@ -12,6 +12,10 @@ module App
       set :sass, Compass.sass_engine_options
     end
     
+    before do
+      cache_control :public, :must_revalidate, max_age: 60
+    end
+    
     get '/stylesheets/:name.css' do
       sass :"stylesheets/#{params[:name]}"
     end
