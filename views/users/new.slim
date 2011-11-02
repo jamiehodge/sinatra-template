@@ -1,6 +1,6 @@
 form action=url('/') method='post'
   input type='text' name='user[name]' placeholder=t.user.name
   input type='password' name='user[password]' placeholder=t.user.password
-  input type='submit' value='create'
+  input type='submit' value=t.actions.create
   p
-    a href=url('/') t.action.cancel
+    a href=url('/') = t.actions.cancel
