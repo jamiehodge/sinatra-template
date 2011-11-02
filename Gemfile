@@ -16,6 +16,10 @@ gem 'bcrypt-ruby', require: 'bcrypt'
 gem 'sqlite3'
 gem 'sequel'
 
+group :development do
+  gem 'sinatra-reloader', require: 'sinatra/reloader'
+end
+
 group :test do
   gem 'minitest', require: 'minitest/spec'
   gem 'rack-test', require: 'rack/test'

@@ -6,6 +6,10 @@ module App
       register Sinatra::R18n
     end
     
+    configure :development do
+      register Sinatra::Reloader
+    end
+    
     helpers do
       def cycle
         @cycle ||= %w{odd even}.cycle

@@ -6,6 +6,10 @@ module App
       register Sinatra::R18n
     end
     
+    configure :development do
+      register Sinatra::Reloader
+    end
+    
     before do
       session[:locale] = params[:locale] if params[:locale]
     end
