@@ -3,6 +3,7 @@ source :rubygems
 gem 'sass'
 gem 'compass'
 gem 'slim'
+gem 'coffee-script'
 
 gem 'sinatra', require: 'sinatra/base'
 gem 'rack-flash', require: 'rack/flash'

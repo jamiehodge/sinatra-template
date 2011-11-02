@@ -1,0 +1,7 @@
+form action=url("/#{user.id}") method='post'
+  input type='hidden' name='_method' value='put'
+  input type='text' name='user[name]' value=user.name
+  input type='password' name='user[password]' value=user.password
+  input type='submit' value='update'
+  p
+    a href=url("/#{user.id}") cancel

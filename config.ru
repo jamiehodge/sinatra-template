@@ -1,12 +1,28 @@
 require './init'
 
+use Rack::MethodOverride
+use Rack::Session::Cookie
+use Rack::Flash, accessorize: [:notice, :error, :success]
 use Rack::Cache if ENV['RACK_ENV'] == 'production'
 
-use Warden::Manager do |manager|
-  manager.default_strategies :password
-  manager.failure_app = MyApp
+use Warden::Manager do |config|
+  config.scope_defaults :default,
+    strategies: [:password], 
+    action: 'session/unauthenticated'
+  config.failure_app = self
 end
 
 map '/' do
-  run MyApp
+  run App::Public
 end
+
+map '/session' do
+  run App::Session
+end
+
+map '/admin' do
+  map '/users' do
+    run App::Users
+  end
+end
+

@@ -16,10 +16,10 @@ class User < Sequel::Model
   include BCrypt
   
   def password
-    @password ||= Password.new(password_hash)
+    Password.new(super)
   end
   
   def password=(new_password)
-    self.password_hash = Password.create(new_password)
+    super(Password.create(new_password))
   end
 end

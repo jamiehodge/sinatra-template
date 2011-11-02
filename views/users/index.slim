@@ -1,8 +1,14 @@
-h1 Users
 table.users
-  tr
+  tr class=cycle.next
     th Name
+    th Password
   - for user in users do
-    tr
-      td = user.name
-        
+    tr class=cycle.next
+      td 
+        a href=url("/#{user.id}") = user.name
+      td = user.password
+
+nav
+  ul
+    li 
+      a href=url('/new') new
