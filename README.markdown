@@ -41,8 +41,16 @@ Or
     
     http://sinatra-template.dev
     
+    
+You will need to populate the database with users if you wish to login.
+    
 TODO
 ----
 
 All Sinatra classes currently share a common layout. This layout includes
 hardcoded asset paths. This will need to be fixed.
+
+Credits
+-------
+
+Originally based on DarrenN's [Stretchy Pants](https://github.com/DarrenN/stretchy_pants).
