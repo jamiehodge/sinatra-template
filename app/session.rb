@@ -17,11 +17,16 @@ module App
       flash.success = 'Successfully logged out'
       redirect '/'
     end
-
-    post '/unauthenticated' do
+    
+    post '/unauthenticated', provides: :html do
       session[:return_to] = env['warden.options'][:attempted_path]
       flash.notice = env['warden'].message
       redirect to '/new'
+    end
+    
+    post '/unauthenticated', provides: [:json, :xml] do
+      headers 'WWW-Authenticate' => %(Basic realm="Login")
+      401
     end
     
     not_found do

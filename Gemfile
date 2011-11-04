@@ -5,6 +5,8 @@ gem 'compass'
 gem 'slim'
 gem 'coffee-script'
 
+gem 'rack-parser', require: 'rack/parser'
+
 gem 'sinatra', require: 'sinatra/base'
 gem 'rack-flash', require: 'rack/flash'
 gem 'sinatra-r18n', require: 'sinatra/r18n'

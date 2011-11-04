@@ -18,3 +18,26 @@ Warden::Strategies.add(:password) do
     user.nil? ? fail!('Could not log in') : success!(user, 'Successfully logged in')
   end
 end
+
+Warden::Strategies.add(:basic) do
+  
+  def auth
+    @auth ||= Rack::Auth::Basic::Request.new(env)
+  end
+  
+  def valid?
+    auth.provided? && auth.basic? && auth.credentials
+  end
+  
+  def authenticate!
+    user = User.authenticate(
+      auth.credentials.first,
+      auth.credentials.last
+    )
+    user.nil? ? fail! : success!(user)
+  end
+  
+  def store?
+    false
+  end
+end
