@@ -37,7 +37,7 @@ body
             li
               a href='/admin/users' = t.nav.users
             li
-              form action='/session' method='post'
+              form action='/session' method='post' enctype='application/x-www-form-urlencoded'
                 input type='hidden' name='_method' value='delete'
                 input type='submit' value=t.nav.logout
           - else
