@@ -1,6 +1,5 @@
 require './init'
 
-use Rack::Parser
 use Rack::MethodOverride
 use Rack::Session::Cookie
 use Rack::Flash, accessorize: [:notice, :error, :success]

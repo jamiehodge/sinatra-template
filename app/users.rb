@@ -1,6 +1,8 @@
 module App
   class Users < App::Base
     
+    use Rack::Parser
+    
     helpers do
       def cycle
         @cycle ||= %w{odd even}.cycle
@@ -8,11 +10,15 @@ module App
     end
     
     before provides: :html do
-      env['warden'].authenticate!
+      if settings.mime_types(:html).include? request.preferred_type
+        env['warden'].authenticate!
+      end
     end
     
     before provides: :json do
-      env['warden'].authenticate! scope: :api
+      if settings.mime_types(:json).include? request.preferred_type
+        env['warden'].authenticate! scope: :api
+      end
     end
     
     before %r{^/(?<id>\d+)} do
@@ -35,7 +41,7 @@ module App
 
     # create
     post '/' do
-      error 400 unless @user = User.create(params[:user])
+      @user = User.create(params[:user])
       pass
     end
     
@@ -44,8 +50,11 @@ module App
     end
     
     post '/', provides: :json do
-      headers 'Location' => url("/#{@user.id}")
-      201
+      headers \
+        'Location' => url("/#{@user.id}"),
+        'Content-Location' => url("/#{@user.id}")
+      status 201
+      MutiJson.encode(@user.values)
     end
 
     # read
@@ -78,7 +87,7 @@ module App
 
     # destroy
     delete '/:id' do
-      @user.destroy
+      halt 403 unless @user.destroy
       pass
     end
     
@@ -89,5 +98,11 @@ module App
     delete '/:id', provides: :json do
       204
     end
+    
+    # errors
+    error Sequel::ValidationFailed, Sequel::HookFailed do
+      422
+    end
+    
   end
 end
