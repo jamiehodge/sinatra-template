@@ -1,0 +1,248 @@
+// Imports -------------------------------------------------------------------
+
+@import base
+@import compass/reset
+
+// Typography ----------------------------------------------------------------
+
+.serif
+  +serif-family
+
+.sans
+  +sans-family
+
+.mono
+  +monospace-family
+
+.caps
+  letter-spacing: .1em
+
+.allcaps
+  @extend .caps
+  text-transform: uppercase
+
+.smallcaps
+  @extend .caps
+  font-variant: small-caps
+
+// Root ----------------------------------------------------------------------
+
++establish-baseline
+
+html
+  text-rendering: optimizeLegibility
+  -webkit-font-smoothing: antialiased
+  -webkit-text-size-adjust: 100%
+  -ms-text-size-adjust: 100%
+
+body
+  @extend .serif
+  > div
+    +container
+    +susy-grid-background
+    +baseline-grid-background
+    +contrasted($background-color)
+  
+// Selected Text -------------------------------------------------------------
+
+=apply-selected-text($color:$base-color)
+  ::-webkit-selection
+    +contrasted($color)
+  ::-moz-selection
+    +contrasted($color)
+  ::selection
+    +contrasted($color)
+
++apply-selected-text
+
+// Links ---------------------------------------------------------------------
+
+$link   :   "&:link, &:visited"
+$focus  :   "&:focus, &:hover, &:active"
+
+a
+  &:hover, &:active
+    outline: none
+  #{$link}
+    color: $triad-support-color
+    text-decoration: none
+  #{$focus}
+    color: $triad-accent-color
+
+// Headings ------------------------------------------------------------------
+
+h1, .h1
+  +adjust-font-size-to(32px)
+  +trailer(1,32px)
+  @extend .sans
+
+h2, .h2
+  +adjust-font-size-to(28px)
+  +trailer(1,28px)
+
+h3, .h3
+  +adjust-font-size-to(24px)
+  +trailer(1,24px)
+
+h4, .h4
+  +adjust-font-size-to(20px)
+  +trailer(1,20px)
+  
+h5, .h5, h6, .h6
+  +trailer
+
+// https://github.com/nhoizey/HTML5-Titles-Inception
+
+$min-depth: 2
+$max-depth: 6
+$sectioning-elements: 'section, article, aside, nav'
+
+@for $level from $min-depth through $max-depth
+  $selector: #{$sectioning-elements}
+  $depth: $level - 1
+  
+  #{nest(#{$selector}, 'h#{$depth}')}
+    @extend .h#{$level}
+   
+  $depth: - 1
+  
+  @while 0 < $depth
+    $selector: #{nest(#{selector}, #{sectioning-elements})}
+    #{nest(#{$selector}, 'h#{deep}')}
+      @extend .h#{$level}
+    $depth: - 1
+
+// Inline --------------------------------------------------------------------
+
+cite, em, dfn, address, i
+  font-style: italic
+
+strong, dfn, b
+  font-weight: bold
+
+sup, sub
+  position: relative
+  font-size: smaller
+  line-height: 0
+
+sup
+  top: -.5em
+
+sub
+  bottom: -.25em
+
+abbr, acronym
+  border-bottom: 1px dotted
+  cursor: help
+
+ins
+  text-decoration: underline
+
+del
+  text-decoration: line-through
+
+mark
+  background: #ff9
+  background-color: rgba(#ff0,.5)
+  text-shadow: none
+
+small
+  +adjust-font-size-to(12px)
+
+q
+  font-style: italic
+  em
+    font-style: normal
+
+pre, code, tt
+  @extend .mono
+
+// Block ---------------------------------------------------------------------
+
+p
+  +trailer
+
+pre
+  padding: rhythm()
+  white-space: pre
+  white-space: pre-wrap
+  white-space: pre-line
+  word-wrap: break-word
+
+blockquote
+  padding: rhythm()
+  font-style: italic
+
+/* Replaced ------------------------------------------------------------------
+
+figure
+  img, object, embed
+    vertical-align: top
+    max-width: 100%
+
+.ie7
+  img
+    -ms-interpolation-mode: bicubic
+
+/* Lists ---------------------------------------------------------------------
+
+=no-style-list
+  +reset-box-model
+  +no-bullets
+
+ol, ul
+  margin-left: rhythm()
+
+ol
+  list-style-type: decimal
+
+ul
+  list-style-type: disc
+
+dt
+  +leader
+  font-style: italic
+
+dd
+  margin-left: rhythm()
+
+nav
+  ul
+    +no-style-list
+
+/* Tables --------------------------------------------------------------------
+
+table
+  +trailer
+  width: 100%
+  border-collapse: separate
+  border-spacing: 0
+
+table, td, th
+  vertical-align: top
+
+th, thead th
+  font-weight: bold
+
+th, td, caption
+  padding: rhythm(.5)
+  text-align: left
+  font-weight: normal
+
+table, th
+  +trailing-border(1px)
+
+tfoot
+  +adjust-font-size-to(14px)
+
+caption
+  @extend .allcaps
+      
+// Forms ---------------------------------------------------------------------
+
+@import formalize
+
+// Flash ---------------------------------------------------------------------
+
+@import flash
++flash-message-classes

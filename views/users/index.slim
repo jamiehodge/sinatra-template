@@ -1,12 +1,10 @@
 table.users
   tr class=cycle.next
     th = t.user.name
-    th = t.user.password
   - for user in users do
     tr class=cycle.next
       td 
         a href=url("/#{user.id}") = user.name
-      td = user.password
 
 nav
   ul

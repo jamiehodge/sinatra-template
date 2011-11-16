@@ -1,0 +1,50 @@
+// 320 Grid ------------------------------------------------------------------
+
+$total-cols         : 6
+$col-width          : 3em
+$gutter-width       : 1em
+$side-gutter-width  : $gutter-width
+
+// Root ----------------------------------------------------------------------
+
+body
+  > div
+    +container
+    +susy-grid-background
+
+// Layout --------------------------------------------------------------------
+
+header[role=banner]
+  +full
+  +horizontal-padding
+  +contrasted($base-color)
+  h1
+    a
+      +unstyled-link
+
+nav[role=navigation]
+  +full
+  ul
+    +inline-list
+    li
+      &:after
+        content: '/'
+        padding: 0 rhythm() / 8
+      &:last-child:after
+        content: ''
+        padding: 0
+  
+div[role="main"]
+  +full
+
+footer[role=contentinfo]
+  +full
+  nav
+    +inline-list
+    li
+      &:after
+        content: '/'
+        padding: 0 rhythm() / 8
+      &:last-child:after
+        content: ''
+        padding: 0

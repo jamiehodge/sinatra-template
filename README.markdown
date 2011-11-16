@@ -17,7 +17,7 @@ http basic authentication.
 * Compass
 * Sass
 * Slim
-* 960.gs
+* Susy responsive grid layout (based upon https://github.com/ericam/320-susy)
 * Formalize
 * MiniTest
 * Guard

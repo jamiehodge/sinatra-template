@@ -1,0 +1,56 @@
+// Imports
+
+@import compass
+@import compass/layout
+@import susy
+
+// Settings
+
+$legacy-support-for-ie6         : false
+$legacy-support-for-ie7         : false !default
+$legacy-support-for-ie8         : false !default
+$ie                             : false !default
+
+$show-column-grid-backgrounds   : true
+$show-baseline-grid-backgrounds : true
+$show-grid-backgrounds          : false
+
+// Font Sizes
+
+$base-font-size   : 16px
+$base-line-height : $base-font-size*1.5
+
+// Colors
+
+$base-color                   : hsl(10, 50, 50) !default
+$analog-support-color         : adjust-hue($base-color, 30)
+$analog-accent-color          : adjust-hue($base-color, -30)
+$complement-color             : complement($base-color)
+$complement-support-color     : adjust-hue($base-color, 180 + 30)
+$complement-accent-color      : adjust-hue($base-color, 180 - 30)
+$triad-support-color          : adjust-hue($base-color, 120)
+$triad-accent-color           : adjust-hue($base-color, -120)
+
+$background-color             : hsl(0, 0, 93)
+
+$grid-background-baseline-color : rgba($base-color, 0.125)
+$grid-background-column-color   : rgba($base-color, 0.125)
+$grid-background-gutter-color   : rgba($base-color, 0)
+
+// Fonts
+
+=sans-family
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
+
+=serif-family
+  font-family: georgia, serif
+
+=monospace-family
+  font-family: "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, Courier, monospace, sans-serif
+
+// Mixins
+
+=horizontal-padding($l:rhythm(),$r:$l)
+  padding:
+    left: $l
+    right: $r

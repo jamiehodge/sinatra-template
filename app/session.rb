@@ -20,7 +20,7 @@ module App
     
     post '/unauthenticated', provides: :html do
       session[:return_to] = env['warden.options'][:attempted_path]
-      flash.notice = env['warden'].message
+      flash.error = env['warden'].message
       redirect to '/new'
     end
     

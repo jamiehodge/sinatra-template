@@ -7,44 +7,57 @@ doctype html
 head
   meta charset='utf-8'
   
+  meta http-equiv='cleartype' content='on'
   meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'
   
   title Sinatra Template
   meta name='description' content='' 
-  meta name='author' content='' 
+  meta name='author' content='Jamie M. Hodge' 
   meta name='keywords' content=''
+  meta name='language' content='en-us'
   
-  meta name='viewport' content='width=device-width, initial-scale=1.0'
+  meta name='viewport' content='width=device-width, target-densitydpi=160dpi, initial-scale=1'
   
-  link href='/favicon.ico' rel='shortcut icon'
-  link href='/apple-touch-icon.png' rel='apple-touch-icon'
+  link rel='canonical' href=url('/')
   
-  link href='/stylesheets/app.css?v=1' rel='stylesheet'
-  link href='/stylesheets/handheld.css?v=1' media='handheld' rel='stylesheet'
+  meta name='apple-mobile-web-app-capable' content='yes'
+  meta name='apple-mobile-web-app-status-bar-style' content='black-translucent'
+  link rel='apple-touch-startup-image' href='/images/favicons/splash.png'
+  
+  link rel='shortcut icon' href='/images/favicons/favicon.ico' 
+  link rel='apple-touch-icon-precomposed' sizes='114x114' href='/images/favicons-apple-touch-icon-114x114-precomposed.png'
+  link rel='apple-touch-icon-precomposed' sizes='74x74' href='/images/favicons-apple-touch-icon-74x74-precomposed.png'
+  link rel='apple-touch-icon-precomposed' href='/images/favicons/apple-touch-icon-precomposed.png' 
+  
+  /[ if (IE 7)|(IE 9) ]
+    link rel='stylesheet' href='/stylesheets/ie.css'
+  
+  link rel='stylesheet' href='/stylesheets/screen.css'
+  
+  link rel='stylesheet' href='/stylesheets/print.css' media='print'
   
   script src='/js/modernizr-2.0.min.js'
 body
-  #container
-    header
+  .container
+    header role='banner'
       h1 
-        a href='/' = t.app.title
-    aside
-      nav
-        ul
+        a rel='home' href='/' = t.app.title
+    nav role='navigation'
+      ul
+        li
+          a href='/' = t.nav.root
+        - if env['warden'].authenticated?
           li
-            a href='/' = t.nav.root
-          - if env['warden'].authenticated?
-            li
-              a href='/admin/users' = t.nav.users
-            li
-              form action='/session' method='post' enctype='application/x-www-form-urlencoded'
-                input type='hidden' name='_method' value='delete'
-                input type='submit' value=t.nav.logout
-          - else
-            li
-              a href='/session/new' = t.nav.login
-              
-    #main roles='main'
+            a href='/admin/users' = t.nav.users
+          li
+            form action='/session' method='post' enctype='application/x-www-form-urlencoded'
+              input type='hidden' name='_method' value='delete'
+              input type='submit' value=t.nav.logout
+        - else
+          li
+            a href='/session/new' = t.nav.login  
+      
+    #main role='main'
       #flash
         - [:notice, :error, :success].each do |name|
           - if flash.has?(name)
@@ -52,14 +65,14 @@ body
               p = flash[name]
       == yield
       
-    footer
-      small &copy;#{Date.today.year}
-      nav
+    footer role='contentinfo'
+      p &copy;#{Date.today.year}
+      nav.locales
         ul
           - for locale in r18n.available_locales do
             li
               a href="?locale=#{locale.code}" = locale.title.downcase
-      
+
   script src='//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'
   javascript:
     window.jQuery || document.write("<script src=\"/js/jquery-1.6.4.min.js'\"><\/script>")
@@ -68,6 +81,16 @@ body
   script src='/js/app.js?v=1' // application code
   
   javascript:
+    if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
+      var viewportmeta = document.querySelectorAll('meta[name="viewport"]')[0];
+      if (viewportmeta) {
+        viewportmeta.content = 'width=device-width, minimum-scale=1.0, maximum-scale=1.0';
+        document.body.addEventListener('gesturestart', function() {
+          viewportmeta.content = 'width=device-width, minimum-scale=0.25, maximum-scale=1.6';
+        }, false);
+      }
+    }
+    
     var _gaq = [['_setAccount', 'UA-XXXXX-X'], ['_trackPageview'], ['_trackPageLoadTime']];
     (function(d, t) {
       var g = d.createElement(t),

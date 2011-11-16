@@ -12,6 +12,8 @@ GEM
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
+    compass-susy-plugin (0.9)
+      compass (>= 0.11.1)
     execjs (1.2.9)
       multi_json (~> 1.0)
     fssm (0.2.7)
@@ -78,6 +80,7 @@ DEPENDENCIES
   bcrypt-ruby
   coffee-script
   compass
+  compass-susy-plugin
   growl_notify
   guard
   guard-minitest

@@ -1,15 +1,16 @@
 article.user
   header
     h1 = user.name
-  p = user.password
     
-  form action=url("#{user.id}") method='post'
-    input type='hidden' name='_method' value='delete'
-    input type='submit' value=t.actions.delete
 nav
   ul
     li
       a href=url("#{user.id}/edit") = t.actions.edit
     li
+      form action=url("#{user.id}") method='post'
+        input type='hidden' name='_method' value='delete'
+        input type='submit' value=t.actions.delete
+    li
       a href=url('/') = t.nav.users
+    
     

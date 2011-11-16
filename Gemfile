@@ -2,6 +2,8 @@ source :rubygems
 
 gem 'sass'
 gem 'compass'
+gem 'compass-susy-plugin', require: 'susy'
+
 gem 'slim'
 gem 'coffee-script'
 

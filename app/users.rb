@@ -1,7 +1,7 @@
 module App
   class Users < App::Base
     
-    use Rack::Parser
+    # use Rack::Parser
     
     helpers do
       def cycle
@@ -35,7 +35,7 @@ module App
     end
 
     # new
-    get '/new' do
+    get '/new', provides: :html do
       slim :'users/new'
     end
 
@@ -67,7 +67,7 @@ module App
     end
 
     # edit
-    get '/:id/edit' do
+    get '/:id/edit', provides: :html do
       slim :'users/edit', locals: { user: @user }
     end
 
