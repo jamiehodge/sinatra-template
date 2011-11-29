@@ -16,16 +16,16 @@ use Warden::Manager do |config|
 end
 
 map '/' do
-  run App::Public
+  run App::Controller::Public
 end
 
 map '/session' do
-  run App::Session
+  run App::Controller::Session
 end
 
 map '/admin' do
   map '/users' do
-    run App::Users
+    run App::Controller::Users
   end
 end
 

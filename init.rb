@@ -3,8 +3,10 @@ ENV['RACK_ENV'] ||= 'development'
 require 'bundler/setup'
 Bundler.require(:default, ENV['RACK_ENV'].to_sym)
 
-%w{db models app}.each do |f| 
-  require_relative File.join(f, 'init')
+Dir.glob('./config/*.rb').each do |file|
+  require file
 end
 
-require_relative 'strategies'
+Dir.glob('./app/{models,helpers,controllers}/*.rb').each do |file|
+  require file
+end

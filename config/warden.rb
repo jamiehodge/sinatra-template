@@ -1,5 +1,5 @@
 Warden::Manager.serialize_into_session{|user| user.id }
-Warden::Manager.serialize_from_session{|id| User[id] }
+Warden::Manager.serialize_from_session{|id| App::Model::User[id] }
 
 Warden::Manager.before_failure do |env,opts|
   env['REQUEST_METHOD'] = 'POST'
@@ -11,7 +11,7 @@ Warden::Strategies.add(:password) do
   end
   
   def authenticate!
-    user = User.authenticate(
+    user = App::Model::User.authenticate(
       params['user']['name'], 
       params['user']['password']
       )
