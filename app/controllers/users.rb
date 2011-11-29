@@ -1,11 +1,11 @@
+require 'sinatra/resource'
+
 module App
   module Controller
-    class Users < Resource
+    class Users < Base
+      register Sinatra::Resource
       
-      def initialize(app = nil)
-        @resource = App::Model::User
-        super
-      end
+      set :resource, App::Model::User
     end
   end
 end
