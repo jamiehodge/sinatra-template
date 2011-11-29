@@ -18,44 +18,42 @@ head
   
   meta name='viewport' content='width=device-width, target-densitydpi=160dpi, initial-scale=1'
   
-  link rel='canonical' href=url('/')
-  
   meta name='apple-mobile-web-app-capable' content='yes'
   meta name='apple-mobile-web-app-status-bar-style' content='black-translucent'
-  link rel='apple-touch-startup-image' href='/images/favicons/splash.png'
+  link rel='apple-touch-startup-image' href=url('/images/favicons/splash.png', true, false)
   
   link rel='shortcut icon' href='/images/favicons/favicon.ico' 
-  link rel='apple-touch-icon-precomposed' sizes='114x114' href='/images/favicons-apple-touch-icon-114x114-precomposed.png'
-  link rel='apple-touch-icon-precomposed' sizes='74x74' href='/images/favicons-apple-touch-icon-74x74-precomposed.png'
-  link rel='apple-touch-icon-precomposed' href='/images/favicons/apple-touch-icon-precomposed.png' 
+  link rel='apple-touch-icon-precomposed' sizes='114x114' href=url('/images/favicons-apple-touch-icon-114x114-precomposed.png', true, false)
+  link rel='apple-touch-icon-precomposed' sizes='74x74' href=url('/images/favicons-apple-touch-icon-74x74-precomposed.png', true, false)
+  link rel='apple-touch-icon-precomposed' href=url('/images/favicons/apple-touch-icon-precomposed.png', true, false)
   
   /[ if (IE 7)|(IE 9) ]
-    link rel='stylesheet' href='/stylesheets/ie.css'
+    link rel='stylesheet' href=url('/stylesheets/ie.css', true, false)
   
-  link rel='stylesheet' href='/stylesheets/screen.css'
+  link rel='stylesheet' href=url('/stylesheets/screen.css', true, false)
   
-  link rel='stylesheet' href='/stylesheets/print.css' media='print'
+  link rel='stylesheet' href=url('/stylesheets/print.css', true, false) media='print'
   
-  script src='/js/modernizr-2.0.min.js'
+  script src=url('/js/modernizr-2.0.min.js', true, false)
 body
   .container
     header role='banner'
       h1 
-        a rel='home' href='/' = t.app.title
+        a rel='home' href=url('/', true, false) = t.app.title
     nav role='navigation'
       ul
         li
           a href='/' = t.nav.root
         - if env['warden'].authenticated?
           li
-            a href='/admin/users' = t.nav.users
+            a href=url('/admin/users', true, false) = t.nav.users
           li
-            form action='/session' method='post' enctype='application/x-www-form-urlencoded'
+            form action=url('/session', true, false) method='post' enctype='application/x-www-form-urlencoded'
               input type='hidden' name='_method' value='delete'
               input type='submit' value=t.nav.logout
         - else
           li
-            a href='/session/new' = t.nav.login  
+            a href=url('/session/new', true, false) = t.nav.login  
       
     #main role='main'
       #flash
@@ -75,10 +73,10 @@ body
 
   script src='//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'
   javascript:
-    window.jQuery || document.write("<script src=\"/js/jquery-1.6.4.min.js'\"><\/script>")
+    window.jQuery || document.write("<script src=\"#{url('/js/jquery-1.6.4.min.js', true, false)}'\"><\/script>")
   
-  script src='/js/jquery.formalize.min.js'
-  script src='/js/app.js?v=1' // application code
+  script src=url('/js/jquery.formalize.min.js', true, false)
+  script src=url('/js/app.js?v=1', true, false) // application code
   
   javascript:
     if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
