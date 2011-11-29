@@ -5,7 +5,7 @@ module App
     class Users < Base
       register Sinatra::Resource
       
-      set :resource, App::Model::User
+      resource(App::Model::User)
     end
   end
 end
