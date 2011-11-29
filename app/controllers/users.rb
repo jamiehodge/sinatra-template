@@ -1,6 +1,6 @@
 module App
   module Controller
-    class Users < AbstractResource
+    class Users < Resource
       
       def initialize(app = nil)
         @resource = App::Model::User

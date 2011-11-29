@@ -1,6 +1,6 @@
 module App
   module Controller
-    class AbstractResource < Base
+    class Resource < Base
 
       # use Rack::Parser
 
